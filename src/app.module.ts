@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
-
-import { BookmarkModule } from './bookmark/bookmark.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
@@ -13,7 +11,6 @@ import { UsersModule } from './users/users.module';
     }),
     AuthModule,
     UsersModule,
-    BookmarkModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule], // Import ConfigModule here
       useFactory: (configService: ConfigService) => ({
