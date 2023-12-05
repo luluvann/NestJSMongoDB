@@ -25,5 +25,4 @@ export class UsersService {
     const users = await this.userModel.find().exec();
     return users as User[];
   }
-
 }
