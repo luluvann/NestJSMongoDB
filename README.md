@@ -55,3 +55,4 @@ in the controller file *users.controller.ts*, there will be 3 routes defined as 
 - A POST req: **'insertUser'** which will take a json body following the dto structure defined in insert-user.dto.ts and return a response of type **User**. http://localhost:3000/users/
 - A GET req: **'getUsers'** which will return an array of **User** type http://localhost:3000/users/
 - A GET rea: **'getUserByID'** which will take a user id as a param and will return the requested **User** http://localhost:3000/users/:id
+The controllers' name are self-explanatory
