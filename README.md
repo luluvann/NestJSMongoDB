@@ -46,3 +46,12 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Routes examples explanations
+
+### Users
+in /src/users, 3 files will be found: *users.controller.ts*, *users.module.ts*, *users.service.ts*. Respectively, each file contains the users's controller, the module and service as per the NestJs framework architecture. The users will be assorted with a schema defined in */src/schemas/users.schema.ts* and with a DTO defined in */src/dto/insert-user*.dto.ts
+in the controller file *users.controller.ts*, there will be 3 routes defined as examples as a root route http://localhost:3000/users/:
+- A POST req: **'insertUser'** which will take a json body following the dto structure defined in insert-user.dto.ts and return a response of type **User**. http://localhost:3000/users/
+- A GET req: **'getUsers'** which will return an array of **User** type http://localhost:3000/users/
+- A GET rea: **'getUserByID'** which will take a user id as a param and will return the requested **User** http://localhost:3000/users/:id
