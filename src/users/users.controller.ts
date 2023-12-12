@@ -1,20 +1,28 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from '../schemas/user.schema';
+import { InsertUserDto } from 'src/dto/insert-user.dto';
+import { ObjectId } from 'mongoose';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post('add')
-  async insertUser(@Body('name') userName: string) {
-    const generatedId = await this.usersService.insertUser(userName);
-    return { id: generatedId };
+  @Post()
+  async insertUser(@Body() user: InsertUserDto): Promise<User> {
+    const generatedUser = await this.usersService.insertUser(user);
+    return generatedUser;
   }
 
   @Get()
-  async getUsers() {
-    const users = await this.usersService.getUsers();
-    return users as User[];
+  async getUsers(): Promise<User[]> {
+    const users = await this.usersService.getAllUsers();
+    return users;
+  }
+
+  @Get(':id')
+  async getUserById(@Param('id') id: ObjectId): Promise<User> {
+    const user = await this.usersService.getUserById(id);
+    return user;
   }
 }
