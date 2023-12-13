@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId } from 'mongoose';
+import { Injectable } from '@nestjs/common';
+import { UsersRepository } from './users.repository';
+import { ObjectId } from 'mongoose';
 
 interface User {
   name: string;
@@ -8,26 +8,17 @@ interface User {
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('User') private userModel: Model<User>) {}
+  constructor(private usersRepository: UsersRepository) {}
 
   async insertUser(user: User): Promise<User> {
-    const newUser = user;
-    const res = await this.userModel.create(newUser);
-    return res;
+    return this.usersRepository.insertUser(user);
   }
 
   async getAllUsers(): Promise<User[]> {
-    const users = await this.userModel.find();
-    return users;
+    return this.usersRepository.getAllUsers();
   }
 
   async getUserById(id: ObjectId): Promise<User> {
-    const user = await this.userModel.findById(id);
-
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
-    return user;
+    return this.usersRepository.getUserById(id);
   }
 }
